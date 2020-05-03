@@ -1,0 +1,1 @@
+module.exports.SEED = 'token-activo-user-firstname';
