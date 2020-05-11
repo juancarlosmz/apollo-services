@@ -8,30 +8,20 @@ var app = express();
 // ==================================================
 // Obtener todos los Usuario
 // ==================================================
-
-
 app.get('/', (req, res, next) => {
-
-    models.user.findAll({ include: [{ model: models.tipouser, }, { model: models.servicio, }, ] })
+    models.servicio.findAll({})
         .then(data => {
-            models.user.count().then(counts => {
-                res.send({
-                    ok: true,
-                    users: data,
-                    total: counts,
-                });
-            });
+            res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving tutorials."
             });
         });
-
 });
 
 // ==================================================
-// Crear usuarios
+// Crear nuevo
 // ==================================================
 app.post('/', (req, res, next) => {
     // Validate request
@@ -43,14 +33,10 @@ app.post('/', (req, res, next) => {
     }
     // Create a Tutorial
     const objeto = {
-        id_firebase: req.body.id_firebase,
-        fecha_nacimiento: req.body.fecha_nacimiento,
-        sexo: req.body.sexo,
-        tipouserId: req.body.tipouserId,
-        servicioId: req.body.servicioId,
+        descripcion: req.body.descripcion,
     };
     // Save Tutorial in the database
-    models.user.create(objeto)
+    models.servicio.create(objeto)
         .then(data => {
             res.send(data);
         })

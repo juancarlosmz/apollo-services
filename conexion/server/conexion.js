@@ -1,8 +1,13 @@
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'dataBD'
-});
-module.exports = connection;
+module.exports = {
+    HOST: "localhost",
+    USER: "root",
+    PASSWORD: "",
+    DB: "data",
+    dialect: "mysql",
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
+};
